@@ -1,0 +1,96 @@
+data:
+  dataset_path: /srv/datasets/ImageNet/
+  test_batch_size: 256
+  train_batch_size: 64
+  workers: 1
+environment:
+  address: localhost
+  cuda:
+    cudnn_benchmark: false
+    cudnn_deterministic: false
+  dist_url: tcp://localhost:12351
+  distributed: true
+  ngpus: 1
+  platform: local
+  port: '12355'
+  world_size: 1
+log:
+  interval: 100
+  level: INFO
+  root_experiments_dir: experiments/
+  save_model_freq: 1
+  tensorboard: true
+  tensorboard_root: runs/
+model:
+  arch_config:
+    block: xnor
+    layer0:
+      bias: false
+      kernel_size: 7
+      maxpool:
+        kernel_size: 3
+        padding: 1
+        stride: 2
+        type: maxpool2d
+      n_in_channels: 64
+      padding: 3
+      stride: 2
+    layer1:
+      clamp:
+        alpha: 2
+        kind: symmetric
+      double_shortcut: false
+      w_quant: sb
+      x_quant: fp
+    layer2:
+      clamp:
+        alpha: 2
+        kind: symmetric
+      double_shortcut: false
+      w_quant: sb
+      x_quant: fp
+    layer3:
+      clamp:
+        alpha: 2
+        kind: symmetric
+      double_shortcut: false
+      w_quant: sb
+      x_quant: fp
+    layer4:
+      clamp:
+        alpha: 2
+        kind: symmetric
+      double_shortcut: false
+      w_quant: sb
+      x_quant: fp
+    moving_average_mode: 'off'
+    moving_average_momentum: 0.99
+    nonlins:
+    - prelu
+    - prelu
+    num_blocks:
+    - 2
+    - 2
+    - 2
+    - 2
+    output_classes: 1000
+  architecture: resnet
+  kd_config:
+    criterion_config:
+      teacher_correction: false
+      temperature: 1
+    freeze_teacher: true
+    teacher_checkpoint_path: experiments/imagenet-teacher/checkpoints/checkpoint_100.pt
+    teacher_config_path: experiments/imagenet-teacher/config.yaml
+    train_mode: true
+  loss: cross_entropy
+optimization:
+  epochs: 320
+  lr_scheduler:
+    min_lr: 1e-10
+    scheduler: linear_lr
+  optimizer:
+    algorithm: adam
+    lr: 0.0002
+    weight_decay: 0
+seed: 1234
