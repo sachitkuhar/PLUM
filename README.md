@@ -14,9 +14,12 @@ PyTorch implementation of PLUM, a quantization-system co-design framework aimed 
 ```
 @article{
 kuhar2024plum,
-title={PLUM: Improving Inference Efficiency By Leveraging Repetition-Sparsity Trade-Off},
-author={Kuhar, Sachit and Jain, Yash and Alexey Tumanov},
+title={{PLUM}: Improving Inference Efficiency By Leveraging Repetition-Sparsity Trade-Off},
+author={Sachit Kuhar and Yash Jain and Alexey Tumanov},
+journal={Transactions on Machine Learning Research},
+issn={2835-8856},
 year={2024},
 url={https://openreview.net/forum?id=IEKtMMSblm},
+note={}
 }
 ```
